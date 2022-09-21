@@ -29,8 +29,9 @@ main(void)
     }
     if(pid == 0){ //자식 프로세스
       // exec("ssu_login", argv);
+      // printf(1, "init: exec login failed\n");
       exec("sh", argv);
-      printf(1, "init: exec login failed\n");
+      printf(1, "init: exec sh failed\n");
       exit();
     }
     while((wpid=wait()) >= 0 && wpid != pid)

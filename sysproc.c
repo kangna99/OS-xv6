@@ -95,3 +95,10 @@ int sys_memsize(void) {
   size = myproc()->sz;
   return size;
 }
+
+int sys_trace(void) {
+  int mask;
+  if(argint(0, &mask) < 0) return -1;
+  myproc()->tracemask = (uint)mask;
+  return 0;
+}
