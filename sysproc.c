@@ -89,3 +89,14 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+int
+sys_weightset(void)
+{
+  int weight;
+  if(argint(0, &weight) < 0) return -1; // user-level func에서 kernel-level func로 인자를 넘겨줌
+  if(weight == 0) return -1; // 매개변수로 weight 값을 0으로 입력받을 시 에러처리
+  // 매개변수로 입력받은 값을 sdebug 명령어에 의해 생성되는 프로세스의 weight 값으로 부여
+  do_weightset(weight); // proc.c do_weightset() 함수 호출
+  return 0;
+}
